@@ -1,13 +1,20 @@
 import express from "express";
+import "dotenv/config";
 import { connectDB } from "./db/conn.js";
 import path from "path";
 import cors from "cors";
 import cineroutes from "./Routes/cineroutes.js";
 
 const app = express();
+const PORT = process.env.PORT || 4242;
+const FRONTEND_URL = process.env.FRONTEND_URL; 
+
+if (!PORT || !FRONTEND_URL) {
+  throw new Error("Variáveis de ambiente obrigatórias não definidas");
+}
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: FRONTEND_URL,
   methods: ["GET", "POST", "PUT", "DELETE"]
 }));
 
@@ -25,7 +32,7 @@ async function startServer(){
 }
 
 app.listen(4242, ()=>{
-  console.log("Servidor funcionando em http://localhost:4242");
+  console.log("Servidor funcionando!");
 });
 
 startServer();
