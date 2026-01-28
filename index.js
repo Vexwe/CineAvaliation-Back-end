@@ -10,9 +10,6 @@ const app = express();
 const PORT = process.env.PORT;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
-if (!PORT || !FRONTEND_URL) {
-  throw new Error("Variáveis de ambiente obrigatórias não definidas");
-}
 
 app.use(cors({
   origin: FRONTEND_URL,
